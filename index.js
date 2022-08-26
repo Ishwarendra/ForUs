@@ -4,7 +4,6 @@ const path = require("node:path");
 const fs = require("node:fs");
 
 const { token } = require("./config.json");
-// On Repl it
 // const token = process.env['token']
 
 const client = new Client({

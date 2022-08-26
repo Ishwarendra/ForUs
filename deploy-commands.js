@@ -4,11 +4,9 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { clientId, guildIds, token } = require("./config.json");
 
-/*// On replit
-const token = process.env['token']
-const clientId = process.env['clientId']
-var guildIds = process.env['guildIds']
-*/
+// const token = process.env['token']
+// const clientId = process.env['clientId']
+// const guildIds = process.env['guildIds']
 
 var commands = [];
 const commandsPath = path.join(__dirname, "commands"); 
