@@ -1,25 +1,27 @@
-const { SlashCommandBuilder  } = require("discord.js");
-
-const ttMap = new Map();
-ttMap.set("797112895539249163", "https://cdn.discordapp.com/attachments/981855994340597810/1011935829758849094/Screenshot_2022-08-24_at_3.21.29_PM.png");
-ttMap.set("760777560463769610", "https://cdn.discordapp.com/attachments/935406786209534063/1012617588397850714/unknown.png");
+const { SlashCommandBuilder } = require("discord.js");
+const ttMap = require('./../database/ttData.json')
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("timetable")
-    .setDescription("TimeTable (only visible to you)!"),
+    .setDescription("Shows TimeTable. (under construction)"),
 
   async execute(interaction) {
 
     const userId = interaction.user.id;
-    console.log(interaction.nickname, ttMap.has(userId))
-    if (ttMap.has(userId))
-    {
-      await interaction.reply(ttMap.get(userId))
+    const userToken = "_" + userId + "_";
+
+    if (ttMap[userToken]) {
+      try {
+      await interaction.reply({content: ttMap[userId], ephemeral: true})
       return;
+      } catch (error) {
+        await interaction.channel.send({content: `"\`${error}" ::\`  error occured ＞︿＜.`, ephemeral: true})
+        return;
+      }
     }
 
-    await interaction.reply("https://cdn.discordapp.com/attachments/864017045675048990/1011672657420357742/unknown.png")
-    await interaction.channel.send("https://cdn.discordapp.com/attachments/864017045675048990/1012635462155903047/unknown.png");
+    await interaction.reply({content: "https://cdn.discordapp.com/attachments/864017045675048990/1017115482001780766/unknown.png", ephemeral: true})
+    await interaction.followUp({content: "https://cdn.discordapp.com/attachments/864017045675048990/1017115529175109682/unknown.png", ephemeral: true});
   },
 };

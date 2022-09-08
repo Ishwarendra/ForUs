@@ -1,7 +1,6 @@
 const {
   SlashCommandBuilder
 } = require("discord.js");
-const messageCreate = require("../events/messageCreate");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,7 +10,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.reply({
       content: `😢 Yes vro alive.
-        \`Latency:\`  ms.
+        \`Latency:\` ${Date.now() - interaction.createdTimestamp} ms.
         \`API Latency:\` ${Math.round(interaction.client.ws.ping)} ms.`,
     });
   },
