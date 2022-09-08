@@ -43,9 +43,5 @@ for (const file of eventFiles) {
   }
 }
 
-client.on('ready', () => {
-  console.log(client.user)
-})
-
 client.login(token);
 keepAlive() // on REPLit

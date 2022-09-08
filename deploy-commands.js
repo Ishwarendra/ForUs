@@ -3,7 +3,6 @@ const { REST } = require("@discordjs/rest");
 const fs = require("node:fs");
 const path = require("node:path");
 const { clientId, guildIds, token } = require("./config.json");
-
 // const token = process.env['token']
 // const clientId = process.env['clientId']
 // const guildIds = process.env['guildIds']
