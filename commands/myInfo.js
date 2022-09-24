@@ -2,76 +2,14 @@ const {
   SlashCommandBuilder,
   EmbedBuilder,
 } = require("discord.js");
-const moment = require("moment");
 
-const e = require("express");
+const moment = require("moment");
+const { statusColor } = require("./../database/colors.js");
+
 const { get12HourFormat } = require("./../utility_functions/time.js");
 const { makeColored } = require("./../utility_functions/text.js");
-
-statusColor = new Map([
-  ["offline", " ⚪ "],
-  ["dnd", " ⛔ "],
-  ["online", " 🟢 "],
-  ["idle", " 🌙 "],
-]);
-
-function getAvatar(user) {
-  if (!user.avatar)
-    return `https://cdn.discordapp.com/embed/avatars/${
-      user.discriminator % 5
-    }.png`;
-
-  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpeg`;
-}
-
-function getUserStatus(guild, id) {
-  let member = guild.members.cache.get(id);
-  return member?.presence?.status;
-}
-
-function breakInSmallParts(text, max_count = 6) {
-  text = text.trim();
-  words = text.split("/s+/");
-
-  res = "";
-  counter = 0;
-  for (let i = 0; i < words.length; i++) {
-    word = words[i];
-    if (counter < max_count) {
-      res += word;
-      counter++;
-    } else {
-      res += "\n" + word;
-      counter = 1;
-    }
-  }
-
-  return res;
-}
-
-function getUserActivity(guild, id) {
-  let member = guild.members.cache.get(id);
-  let activity = member.presence?.activities?.at(0);
-
-  res = "";
-  if (activity.emoji.name) res += activity.emoji.name + " ";
-
-  if (activity.state.length !== 0) {
-    res += breakInSmallParts(activity.state);
-  } else {
-    res += "No Custom Status";
-  }
-
-  return makeColored(res, "yellow");
-}
-
-function daysPassedSince(joinDate) {
-  const todayDate = new Date();
-  const diffTime = Math.abs(todayDate - joinDate);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  return diffDays;
-}
+const { getAvatar, getUserActivity, getUserStatus } = require("./../utility_functions/user.js")
+const { daysPassedSince } = require("./../utility_functions/date.js")
 
 module.exports = {
   data: new SlashCommandBuilder()
