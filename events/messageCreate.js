@@ -19,7 +19,7 @@ module.exports = {
   once: false,
   async execute(msg) {
     if (msg.author.bot || !msg.content.startsWith(prefix)) return;
-
+    
     var dbPath = path.dirname(__dirname);
     dbPath = path.join(dbPath, "database", "ttData.json");
     var ttData = requireUncached(dbPath);
