@@ -4,7 +4,7 @@ const ttMap = require('./../database/ttData.json')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("timetable")
-    .setDescription("Shows TimeTable. (under construction)"),
+    .setDescription("Shows TimeTable (But only to you)."),
 
   async execute(interaction) {
 
@@ -16,7 +16,7 @@ module.exports = {
       await interaction.reply({content: ttMap[userId], ephemeral: true})
       return;
       } catch (error) {
-        await interaction.channel.send({content: `"\`${error}" ::\`  error occured ＞︿＜.`, ephemeral: true})
+        await interaction.channel.send({content: `"\`${error}" ::\` \nerror occured ＞︿＜.`, ephemeral: true})
         return;
       }
     }

@@ -2,8 +2,6 @@ const prefix = "_";
 const fs = require("fs");
 const path = require("node:path");
 const { dirname } = require("path");
-// const { ownerId } = require("./../config.json");
-// const ownerId = process.env['ownerId']
 
 function requireUncached(module) {
   delete require.cache[require.resolve(module)];

@@ -15,7 +15,7 @@ module.exports = {
         } catch (error) {
           console.log(error);
           await interaction.reply({
-            content: `"\`${error}" ::\`  error occured ＞︿＜.`,
+            content: `"error occured ＞︿＜.\n\`:: ${error}" ::\``,
             ephemeral: true,
           });
         }

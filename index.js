@@ -1,4 +1,4 @@
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const keepAlive = require("./server.js");
 const path = require("node:path");
 const fs = require("node:fs");
@@ -12,6 +12,7 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildPresences, 
   ],
 });
 
