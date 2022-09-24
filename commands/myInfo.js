@@ -1,7 +1,6 @@
 const {
   SlashCommandBuilder,
   EmbedBuilder,
-  channelLink,
 } = require("discord.js");
 
 const {get12HourFormat} = require("./../utility_functions/time.js");
@@ -21,6 +20,13 @@ function userStatus(user)
   return "1";
 }
 
+function getAvatar(user)
+{
+  if (!user.avatar)
+    return `https://cdn.discordapp.com/embed/avatars/${user.discriminator % 5}.png`
+  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpeg`;
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("myinfo")
@@ -31,7 +37,7 @@ module.exports = {
     username = interaction.user.username;
     discriminator = interaction.user.discriminator;
     userColor = interaction.member.displayHexColor;
-    avatarUrl = `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.jpeg`;
+    avatarUrl = getAvatar(interaction.user);
     nickname = interaction.member.nickname;
 
     // Role info
@@ -49,9 +55,9 @@ module.exports = {
     serverUrl = serverInfo.iconURL();
     
     // Status
-    console.log(interaction.member.guild.presences)
+    // console.log(interaction.member.guild.presences)
 
-    const exampleEmbed = new EmbedBuilder()
+    const userInfoEmbed = new EmbedBuilder()
       .setColor(userColor)
       .setAuthor({
         name: `About ${username}#${discriminator}`,
@@ -73,6 +79,6 @@ module.exports = {
       })
       .setFooter({text: `${statusColor.get('online')}`, iconURL: serverUrl})
 
-    await interaction.channel.send({ embeds: [exampleEmbed] });
+    await interaction.reply({ embeds: [userInfoEmbed] });
   },
 };
