@@ -1,3 +1,4 @@
+// Converts time from 24 Hour to 12 Hour format
 function get12HourFormat(date)
 {
   var suffix = "AM (IST)"

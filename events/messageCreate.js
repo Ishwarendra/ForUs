@@ -3,6 +3,11 @@ const fs = require("fs");
 const path = require("node:path");
 const { dirname } = require("path");
 
+const root = path.dirname(__dirname);
+
+// Import functions for command
+const {pingEmbed} = require(path.join(root, 'messageCommands', 'ping.js'));
+
 function requireUncached(module) {
   delete require.cache[require.resolve(module)];
   return require(module);
@@ -26,8 +31,8 @@ module.exports = {
 
     // Make lower case and remove extra spaces between messages
     var command = msg.content.toLowerCase();
-    command = command.replace(/\s+/g, " ").trim();
-
+    command = command.replace(/\s+/g, "").trim();
+    console.log(command)
     // remove prefix
     command = command.substring(1);
     const userId = msg.author.id;
@@ -53,14 +58,12 @@ module.exports = {
     }
 
     // ping command
-    else if (command === "ping") {
-      await msg.channel.send(`😢 Yes vro alive.
-        \`Latency:\` ${Date.now() - msg.createdTimestamp} ms.
-        \`API Latency:\` ${Math.round(msg.client.ws.ping)} ms.`);
+    else if (command === "ping" || command === "pong") {
+      await msg.reply({embeds: [pingEmbed(msg)]});
     }
 
     // Add your own Timetable
-    else if (command === "ttadd" || command === "add tt" || command === "tt add") {
+    else if (command === "ttadd" || command === "addtt") {
       if (msg.attachments.size !== 1) {
         await msg.reply(
           `😶‍🌫️ Hemlo vro nothing added.\nAdd **exactly 1** attachment(image) pls.`
@@ -104,17 +107,23 @@ module.exports = {
     // reset command
     else if (
       command === "resettt" ||
-      command === "reset tt" ||
-      command === "resettimetable") {
+      command === "resettimetable" ||
+      command === "ttreset") {
 
       var userData = fs.readFileSync(dbPath, "utf-8");
       var data = JSON.parse(userData);
       
+      var suffix = ""
+      if (data[userToken])
+      {
+        suffix += "\n";
+        suffix +=  `Old Time table Link (incase you accidently reseted): <${data[userId]}>`
+      }
+
       data[userToken] = false;
       var newData = JSON.stringify(data);
       writeInDB(newData, dbPath);
-
-      await msg.reply("Time Table **reset** to default!");
+      await msg.reply(`Time Table **reset** to default!${suffix}`);
       ttData = requireUncached(dbPath);
     }
   },
