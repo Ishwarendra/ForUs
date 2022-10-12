@@ -10,17 +10,17 @@
 | [MYINFO](#myinfo-command) | Shows your discord profile. | Only interaction |
 
 
-#### HELP COMMAND
+### HELP COMMAND
 ---
 
 <img src="./assets/preview/help.png"  width=50% height=50%>
 
-#### MY INFO COMMAND
+### MY INFO COMMAND
 ---
 
 <img src="./assets/preview/myinfo.png"  width=50% height=50%>
 
-#### PING COMMAND
+### PING COMMAND
 ---
 
 **USING SLASH COMMANDS**
