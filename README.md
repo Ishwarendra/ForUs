@@ -9,23 +9,24 @@
 | RESETTT/ RESETTIMETABLE/ TTRESET | Deletes the custom timetable and resets it to default. | Only Message |
 | [MYINFO](#myinfo-command) | Shows your discord profile. | Only interaction |
 
+
+#### HELP COMMAND
 ---
 
-## HELP COMMAND
+<img src="./assets/preview/help.png"  width=50% height=50%>
+
+#### MY INFO COMMAND
 ---
 
-![helpImage](./assets/preview/help.png)
+<img src="./assets/preview/myinfo.png"  width=50% height=50%>
 
-## MYINFO COMMAND
----
-
-![myInfoImage](assets/preview/myinfo.png)
-
-## PING COMMAND
+#### PING COMMAND
 ---
 
 **USING SLASH COMMANDS**
+
 ![PingEmbed](assets/preview/pingEmbed.png)
 
 **USING MESSAGE TO INTERACT(May get removed without any warning)**
+
 ![pingMsg](assets/preview/pingMsg.png)
