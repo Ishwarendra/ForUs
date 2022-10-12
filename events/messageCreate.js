@@ -7,6 +7,7 @@ const root = path.dirname(__dirname);
 
 // Import functions for command
 const {pingEmbed} = require(path.join(root, 'messageCommands', 'ping.js'));
+const {helpEmbed} = require("./../messageCommands/help.js"); // works on replit too!
 
 function requireUncached(module) {
   delete require.cache[require.resolve(module)];
@@ -125,6 +126,11 @@ module.exports = {
       writeInDB(newData, dbPath);
       await msg.reply(`Time Table **reset** to default!${suffix}`);
       ttData = requireUncached(dbPath);
+    }
+
+    else if (command === "help")
+    {
+      await msg.reply({embeds: [helpEmbed(msg)]});
     }
   },
 };

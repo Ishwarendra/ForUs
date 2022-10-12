@@ -3,13 +3,12 @@ const { dirname } = require("path");
 const root = path.dirname(__dirname);
 
 const { randomEmojiList } = require(path.join(root, 'database', 'emojiLinks.js'))
-
 const { getRandomColor, getRandomElementFromArray } = require(path.join(root, "utility_functions","randomSelection.js"));
 const { makeColored } = require(path.join(root, 'utility_functions', 'text.js'));
 
 // Return an embed for ping command can be reused (JSON format this time)
 function pingEmbed(msg) {
-
+  
   embedColor = getRandomColor();
   textColor = getRandomElementFromArray(['yellow', 'cyan', 'orange']);
   
