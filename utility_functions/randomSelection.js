@@ -20,7 +20,17 @@ function getRandomElementFromArray(a) {
   return a[index];
 }
 
+function getRandomEmoji()
+{
+  const { randomEmojiList } = require("./../database/emojiLinks");
+  random_animated = getRandomElementFromArray(randomEmojiList.animated);
+  random_regular = getRandomElementFromArray(randomEmojiList.regular);
+
+  return getRandomElementFromArray([random_animated, random_regular]);
+}
+
 module.exports = {
   getRandomColor,
-  getRandomElementFromArray
+  getRandomElementFromArray,
+  getRandomEmoji,
 };

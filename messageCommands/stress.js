@@ -3,31 +3,30 @@ const { dirname } = require("path");
 const root = path.dirname(__dirname);
 
 const { getAvatar } = require("../utility_functions/user.js");
-const { getRandomElementFromArray } = require(path.join(root, "utility_functions","randomSelection.js"));
-const {allCommands} = require("./../database/commandList.js"); 
-
+const { getRandomElementFromArray, getRandomColor, getRandomEmoji } = require(path.join(root, "utility_functions","randomSelection.js"));
+const {stressList} = require("./../database/stressList.js"); 
 
 // Return an embed for ping command can be reused (JSON format this time)
-function helpEmbed(msg) {
+function stressEmbed(msg) {
   
-  embedColor = 0xD22B2B;
+  embedColor = getRandomColor();
   textColor = getRandomElementFromArray(['yellow', 'cyan', 'orange']);
   
-  topleft_iconurl = getAvatar(msg.author)
+  topleft_iconurl = getRandomEmoji()
   guildIcon = `https://cdn.discordapp.com/icons/${msg.guild.id}/${msg.guild.icon}.png?size=1024`
 
-  userName = msg.author.username
-  discriminator = msg.author.discriminator
+//   userName = msg.author.username
+//   discriminator = msg.author.discriminator
 
   const embed = {
     color: embedColor,
     author: {
-      name: `HELP | ${userName + '#' + discriminator}`,
+      name: `DEADLINES`,
       iconURL: topleft_iconurl
     },
-    decription: `Help description`,
+    decription: `Deadlines and Stuff`,
     timestamp: new Date().toISOString(),
-    fields: allCommands,
+    fields: stressList,
     footer: {
         text: "Bot Prefix: _\u0020",
         icon_url: guildIcon
@@ -38,5 +37,5 @@ function helpEmbed(msg) {
 }
 
 module.exports = {
-    helpEmbed,
+    stressEmbed,
 }

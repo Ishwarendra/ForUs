@@ -8,6 +8,7 @@ const root = path.dirname(__dirname);
 // Import functions for command
 const {pingEmbed} = require(path.join(root, 'messageCommands', 'ping.js'));
 const {helpEmbed} = require("./../messageCommands/help.js"); // works on replit too!
+const {stressEmbed} = require("./../messageCommands/stress.js");
 
 function requireUncached(module) {
   delete require.cache[require.resolve(module)];
@@ -131,6 +132,11 @@ module.exports = {
     else if (command === "help")
     {
       await msg.reply({embeds: [helpEmbed(msg)]});
+    }
+
+    else if (command === "stress")
+    {
+      await msg.reply({embeds: [stressEmbed(msg)]});
     }
   },
 };
