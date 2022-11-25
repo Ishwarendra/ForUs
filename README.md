@@ -23,10 +23,10 @@
 ### PING COMMAND
 ---
 
-**USING SLASH COMMANDS**
+**USING MESSAGE TO INTERACT(May get removed without any warning)**
 
 ![PingEmbed](assets/preview/pingEmbed.png)
 
-**USING MESSAGE TO INTERACT(May get removed without any warning)**
+**USING SLASH COMMANDS**
 
 ![pingMsg](assets/preview/pingMsg.png)
