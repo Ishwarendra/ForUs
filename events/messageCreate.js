@@ -2,6 +2,7 @@ const prefix = "_";
 const fs = require("fs");
 const path = require("node:path");
 const { dirname } = require("path");
+const stickers = require("../database/stickers.json");
 
 const root = path.dirname(__dirname);
 
@@ -25,8 +26,18 @@ module.exports = {
   name: "messageCreate",
   once: false,
   async execute(msg) {
-    if (msg.author.bot || !msg.content.startsWith(prefix)) return;
-    
+    if (msg.author.bot) return;
+    if (msg.content.length > 2 && msg.content.startsWith(';') && msg.content.endsWith(';')) {
+      const sticker_name = msg.content.substring(1, msg.content.length - 1);
+      console.log(stickers[sticker_name], sticker_name)
+      if (stickers[sticker_name]) {
+        msg.delete(1);
+        await msg.channel.send({content: stickers[sticker_name].url});
+        return;
+      }
+    }
+
+    if (!msg.content.startsWith(prefix)) return;
     var dbPath = path.dirname(__dirname);
     dbPath = path.join(dbPath, "database", "ttData.json");
     var ttData = requireUncached(dbPath);
@@ -34,7 +45,7 @@ module.exports = {
     // Make lower case and remove extra spaces between messages
     var command = msg.content.toLowerCase();
     command = command.replace(/\s+/g, "").trim();
-    console.log(command)
+    // console.log(command)
     // remove prefix
     command = command.substring(1);
     const userId = msg.author.id;
